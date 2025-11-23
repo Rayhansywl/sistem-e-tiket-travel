@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Dashboard Sopir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 h-16">
+        <div class="container mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white text-sm">
+                    <i class="fas fa-shuttle-van"></i>
+                </div>
+                <span class="font-bold text-slate-800 text-lg">Panel<span class="text-blue-600">Sopir</span></span>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold text-slate-800" id="driverName">Sopir</p>
+                    <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold uppercase">Bertugas</span>
+                </div>
+                
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6 max-w-7xl animate-fade-in">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-1 h-6 bg-blue-600 rounded-full"></div>
+            <h2 class="text-xl font-bold text-slate-800">Jadwal Keberangkatan</h2>
+        </div>
+        <div id="jadwalSopir" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+    
+    <script type="module" src="js/driver.js"></script>
+</body>
+</html>

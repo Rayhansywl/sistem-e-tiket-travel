@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Masuk - E-Tiket Travel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-100 h-screen flex items-center justify-center p-4">
+
+    <div class="card w-full max-w-md p-8 relative animate-fade-in shadow-xl bg-white rounded-2xl">
+        <a href="index.html" class="text-sm text-slate-400 hover:text-blue-600 mb-6 inline-flex items-center transition">
+            <i class="fas fa-arrow-left mr-2"></i> Kembali
+        </a>
+
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm">
+                <i class="fas fa-user-lock"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800">Selamat Datang</h2>
+            <p class="text-slate-500 text-sm mt-1">Silakan masuk ke akun Anda</p>
+        </div>
+        
+        <form id="loginForm" autocomplete="off" class="space-y-5">
+            <input type="text" style="display:none">
+            <input type="password" style="display:none">
+
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Email</label>
+                <div class="relative">
+                    <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
+                    <input type="email" id="email" class="w-full pl-11 pr-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition text-sm" placeholder="nama@email.com" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Password</label>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-4 top-3.5 text-slate-400"></i>
+                    <input type="password" id="password" class="w-full pl-11 pr-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition text-sm" placeholder="••••••••" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly');" required>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200 flex justify-center items-center gap-2">
+                Masuk Sekarang
+            </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-slate-600">
+            Belum punya akun? <a href="register.html" class="text-blue-600 font-bold hover:underline">Daftar Disini</a>
+        </p>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+    <script>
+        // Script tambahan untuk memastikan input kosong saat load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const inputs = document.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.setAttribute('autocomplete', 'off');
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 h-16">
+        <div class="container mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white text-sm">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <span class="font-bold text-slate-800 text-lg">Admin<span class="text-blue-600">Panel</span></span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold text-slate-800" id="adminName">Admin</p>
+                    <span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-bold uppercase">Administrator</span>
+                </div>
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6 max-w-7xl animate-fade-in">
+        
+        <div class="flex gap-2 mb-8 overflow-x-auto pb-2 tab-nav">
+            <button onclick="switchTab('jadwal')" id="btn-jadwal" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-md transition">
+                <i class="fas fa-calendar-alt mr-2"></i> Jadwal
+            </button>
+            <button onclick="switchTab('users')" id="btn-users" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
+                <i class="fas fa-user-tie mr-2"></i> Sopir
+            </button>
+            <button onclick="switchTab('penumpang')" id="btn-penumpang" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
+                <i class="fas fa-users mr-2"></i> Penumpang
+            </button>
+            <button onclick="switchTab('transaksi')" id="btn-transaksi" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
+                <i class="fas fa-receipt mr-2"></i> Transaksi
+            </button>
+        </div>
+
+        <div id="tab-jadwal" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1 card p-6 h-fit">
+                    <h3 class="font-bold text-slate-800 mb-4 pb-2 border-b">Buat Jadwal</h3>
+                    <form id="formJadwal" class="space-y-3">
+                        <input type="text" id="tujuan" class="input-std" placeholder="Tujuan" required>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="date" id="tanggal" class="input-std" required>
+                            <input type="time" id="jam" class="input-std" required>
+                        </div>
+                        <input type="number" id="harga" class="input-std" placeholder="Harga (Rp)" required>
+                        <select id="pilihSupir" class="input-std"><option>Loading...</option></select>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold hover:bg-blue-700 transition">Simpan</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-2 space-y-4" id="listJadwal"></div>
+            </div>
+        </div>
+
+        <div id="tab-users" class="tab-content hidden">
+            <div class="card p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-slate-800">Data Sopir</h3>
+                    <button onclick="document.getElementById('formSopirArea').classList.toggle('hidden')" class="bg-slate-800 text-white px-3 py-2 rounded-lg text-xs font-bold hover:bg-black transition">+ Tambah</button>
+                </div>
+                <div id="formSopirArea" class="hidden mb-4 bg-slate-50 p-4 rounded-lg border">
+                    <form id="formTambahSopir" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <input type="text" id="regNamaSopir" placeholder="Nama" class="input-std" required>
+                         <input type="text" id="regHpSopir" placeholder="HP" class="input-std" required>
+                         <input type="email" id="regEmailSopir" placeholder="Email" class="input-std" required>
+                         <input type="password" id="regPassSopir" placeholder="Password" class="input-std" required>
+                         <button type="submit" class="bg-blue-600 text-white py-2 rounded-lg font-bold text-sm md:col-span-2">Simpan Akun</button>
+                    </form>
+                </div>
+                <div class="overflow-x-auto border rounded-lg">
+                    <table class="w-full text-sm text-left"><tbody id="listSopirTable"></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-penumpang" class="tab-content hidden">
+            <div class="card p-6">
+                <h3 class="font-bold text-slate-800 mb-4">Data Penumpang Terdaftar</h3>
+                <div class="overflow-x-auto border rounded-lg">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-700 font-bold border-b">
+                            <tr><th class="p-3">Nama</th><th class="p-3">Kontak</th><th class="p-3">Email</th><th class="p-3">Tgl Daftar</th></tr>
+                        </thead>
+                        <tbody id="listPenumpangTable" class="divide-y divide-slate-100 bg-white"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-transaksi" class="tab-content hidden">
+            <div class="card p-6">
+                <h3 class="font-bold text-slate-800 mb-4">Verifikasi Pembayaran</h3>
+                <div class="overflow-x-auto border rounded-lg">
+                    <table class="w-full text-sm text-left"><tbody id="tabelTransaksi"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEditSopir" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+        <div class="bg-white p-6 rounded-xl w-full max-w-sm shadow-2xl">
+            <h3 class="font-bold text-lg mb-4 text-slate-800">Edit Data Sopir</h3>
+            <input type="hidden" id="editIdSopir">
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold text-slate-500">Nama Lengkap</label>
+                    <input type="text" id="editNamaSopir" class="input-std">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-500">No HP</label>
+                    <input type="text" id="editHpSopir" class="input-std">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="document.getElementById('modalEditSopir').classList.add('hidden')" class="px-4 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded-lg transition">Batal</button>
+                <button onclick="saveEditSopir()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+    <script>
+        function switchTab(t){
+            document.querySelectorAll('.tab-content').forEach(e=>e.classList.add('hidden'));
+            document.getElementById('tab-'+t).classList.remove('hidden');
+            document.querySelectorAll('.tab-nav button').forEach(b=>{
+                b.className="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition";
+            });
+            document.getElementById('btn-'+t).className="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-md transition";
+        }
+    </script>
+</body>
+</html>
