@@ -9,21 +9,15 @@
 </head>
 <body class="bg-slate-50">
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 h-16">
-        <div class="container mx-auto px-6 h-full flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white text-sm">
-                    <i class="fas fa-shield-alt"></i>
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="font-bold text-slate-800 text-xl tracking-tight">Dashboard Admin</div>
+            <div class="flex items-center gap-6">
+                <div class="text-right hidden md:block leading-tight">
+                    <span id="adminName" class="block text-sm font-bold text-slate-700">Administrator</span>
+                    <span class="block text-[10px] text-slate-500 font-medium">Admin</span>
                 </div>
-                <span class="font-bold text-slate-800 text-lg">Admin<span class="text-blue-600">Panel</span></span>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <div class="text-right hidden md:block">
-                    <p class="text-sm font-bold text-slate-800" id="adminName">Admin</p>
-                    <span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-bold uppercase">Administrator</span>
-                </div>
-                <button onclick="logout()" class="btn-logout">
+                <button onclick="logout()" class="bg-red-600 text-white hover:bg-red-700 px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition shadow-md active:scale-95">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
             </div>
@@ -32,34 +26,42 @@
 
     <div class="container mx-auto p-6 max-w-7xl animate-fade-in">
         
-        <div class="flex gap-2 mb-8 overflow-x-auto pb-2 tab-nav">
-            <button onclick="switchTab('jadwal')" id="btn-jadwal" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-md transition">
-                <i class="fas fa-calendar-alt mr-2"></i> Jadwal
-            </button>
-            <button onclick="switchTab('users')" id="btn-users" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
-                <i class="fas fa-user-tie mr-2"></i> Sopir
-            </button>
-            <button onclick="switchTab('penumpang')" id="btn-penumpang" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
-                <i class="fas fa-users mr-2"></i> Penumpang
-            </button>
-            <button onclick="switchTab('transaksi')" id="btn-transaksi" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition">
-                <i class="fas fa-receipt mr-2"></i> Transaksi
-            </button>
+        <div class="flex gap-2 mb-6 tab-nav overflow-x-auto pb-2 no-scrollbar">
+            <button onclick="switchTab('jadwal')" id="btn-jadwal" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap">Jadwal</button>
+            <button onclick="switchTab('users')" id="btn-users" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Data Sopir</button>
+            <button onclick="switchTab('penumpang')" id="btn-penumpang" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Data Penumpang</button>
+            <button onclick="switchTab('transaksi')" id="btn-transaksi" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Verifikasi Pembayaran</button>
+            <button onclick="switchTab('laporan')" id="btn-laporan" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Laporan Keuangan</button>
         </div>
 
         <div id="tab-jadwal" class="tab-content">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-1 card p-6 h-fit">
-                    <h3 class="font-bold text-slate-800 mb-4 pb-2 border-b">Buat Jadwal</h3>
-                    <form id="formJadwal" class="space-y-3">
-                        <input type="text" id="tujuan" class="input-std" placeholder="Tujuan" required>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="date" id="tanggal" class="input-std" required>
-                            <input type="time" id="jam" class="input-std" required>
+                <div class="card p-6 h-fit bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">Buat Jadwal Baru</h3>
+                    <form id="formJadwal" class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-slate-500">Tujuan</label>
+                            <input type="text" id="tujuan" placeholder="Contoh: Jambi - Padang" class="w-full border p-2 rounded-lg text-sm outline-none focus:border-blue-500" required>
                         </div>
-                        <input type="number" id="harga" class="input-std" placeholder="Harga (Rp)" required>
-                        <select id="pilihSupir" class="input-std"><option>Loading...</option></select>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold hover:bg-blue-700 transition">Simpan</button>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs font-bold text-slate-500">Tanggal</label>
+                                <input type="date" id="tanggal" class="w-full border p-2 rounded-lg text-sm" required>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-slate-500">Jam</label>
+                                <input type="time" id="jam" class="w-full border p-2 rounded-lg text-sm" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500">Harga Tiket</label>
+                            <input type="number" id="harga" placeholder="Rp" class="w-full border p-2 rounded-lg text-sm" required>
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500">Pilih Sopir</label>
+                            <select id="pilihSupir" class="w-full border p-2 rounded-lg text-sm bg-white"><option>Loading...</option></select>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">Simpan Jadwal</button>
                     </form>
                 </div>
                 <div class="lg:col-span-2 space-y-4" id="listJadwal"></div>
@@ -67,67 +69,83 @@
         </div>
 
         <div id="tab-users" class="tab-content hidden">
-            <div class="card p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-slate-800">Data Sopir</h3>
-                    <button onclick="document.getElementById('formSopirArea').classList.toggle('hidden')" class="bg-slate-800 text-white px-3 py-2 rounded-lg text-xs font-bold hover:bg-black transition">+ Tambah</button>
+            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-slate-800 text-lg">Manajemen Sopir</h3>
+                    <button onclick="document.getElementById('formSopirArea').classList.toggle('hidden')" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-black transition flex items-center gap-2"><i class="fas fa-plus"></i> Tambah Sopir</button>
                 </div>
-                <div id="formSopirArea" class="hidden mb-4 bg-slate-50 p-4 rounded-lg border">
-                    <form id="formTambahSopir" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                         <input type="text" id="regNamaSopir" placeholder="Nama" class="input-std" required>
-                         <input type="text" id="regHpSopir" placeholder="HP" class="input-std" required>
-                         <input type="email" id="regEmailSopir" placeholder="Email" class="input-std" required>
-                         <input type="password" id="regPassSopir" placeholder="Password" class="input-std" required>
-                         <button type="submit" class="bg-blue-600 text-white py-2 rounded-lg font-bold text-sm md:col-span-2">Simpan Akun</button>
+                <div id="formSopirArea" class="hidden mb-6 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <form id="formTambahSopir" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         <input type="text" id="regNamaSopir" placeholder="Nama Lengkap" class="border p-2 rounded-lg text-sm" required>
+                         <input type="text" id="regHpSopir" placeholder="Nomor HP" class="border p-2 rounded-lg text-sm" required>
+                         <input type="email" id="regEmailSopir" placeholder="Email Login" class="border p-2 rounded-lg text-sm" required>
+                         <input type="password" id="regPassSopir" placeholder="Password Login" class="border p-2 rounded-lg text-sm" required>
+                         <button type="submit" class="bg-blue-600 text-white py-2 rounded-lg font-bold text-sm md:col-span-2 hover:bg-blue-700">Simpan Data Sopir</button>
                     </form>
                 </div>
-                <div class="overflow-x-auto border rounded-lg">
-                    <table class="w-full text-sm text-left"><tbody id="listSopirTable"></tbody></table>
-                </div>
+                <div class="overflow-x-auto rounded-lg border border-slate-100"><table class="w-full text-sm text-left"><tbody id="listSopirTable"></tbody></table></div>
             </div>
         </div>
 
         <div id="tab-penumpang" class="tab-content hidden">
-            <div class="card p-6">
-                <h3 class="font-bold text-slate-800 mb-4">Data Penumpang Terdaftar</h3>
-                <div class="overflow-x-auto border rounded-lg">
+            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-slate-800 mb-4 text-lg">Data Penumpang</h3>
+                <div class="overflow-x-auto rounded-lg border border-slate-100">
                     <table class="w-full text-sm text-left">
-                        <thead class="bg-slate-50 text-slate-700 font-bold border-b">
-                            <tr><th class="p-3">Nama</th><th class="p-3">Kontak</th><th class="p-3">Email</th><th class="p-3">Tgl Daftar</th></tr>
+                        <thead class="bg-slate-50 text-slate-500 font-bold border-b">
+                            <tr><th class="p-3">Nama</th><th class="p-3">Kontak</th><th class="p-3">Email</th><th class="p-3">Bergabung</th></tr>
                         </thead>
-                        <tbody id="listPenumpangTable" class="divide-y divide-slate-100 bg-white"></tbody>
+                        <tbody id="listPenumpangTable" class="divide-y divide-slate-100"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
         <div id="tab-transaksi" class="tab-content hidden">
-            <div class="card p-6">
-                <h3 class="font-bold text-slate-800 mb-4">Verifikasi Pembayaran</h3>
-                <div class="overflow-x-auto border rounded-lg">
-                    <table class="w-full text-sm text-left"><tbody id="tabelTransaksi"></tbody></table>
+            <div class="flex items-center mb-4">
+                <h3 class="font-bold text-slate-800 text-lg">Verifikasi Pembayaran Masuk</h3>
+            </div>
+            
+            <div id="gridTransaksi" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+        </div>
+
+        <div id="tab-laporan" class="tab-content hidden">
+            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-slate-800 text-lg">Laporan Keuangan (Lunas)</h3>
+                    <div class="bg-green-50 text-green-700 px-5 py-3 rounded-xl border border-green-100 text-right">
+                        <p class="text-xs font-bold uppercase tracking-wider opacity-70">Total Pendapatan</p>
+                        <p class="text-2xl font-bold" id="totalPendapatan">Rp0</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-slate-100">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-700 font-bold border-b">
+                            <tr>
+                                <th class="p-3">Tanggal</th><th class="p-3">Penumpang</th><th class="p-3">Rute</th><th class="p-3">Kursi</th><th class="p-3 text-right">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelLaporan" class="divide-y divide-slate-100"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div id="modalEditSopir" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-        <div class="bg-white p-6 rounded-xl w-full max-w-sm shadow-2xl">
-            <h3 class="font-bold text-lg mb-4 text-slate-800">Edit Data Sopir</h3>
+    <div id="modalEditSopir" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-xl w-full max-w-sm shadow-2xl transform transition-all scale-100">
+            <h3 class="font-bold text-lg mb-4 text-slate-800 border-b pb-2">Edit Data Sopir</h3>
             <input type="hidden" id="editIdSopir">
             <div class="space-y-3">
-                <div>
-                    <label class="text-xs font-bold text-slate-500">Nama Lengkap</label>
-                    <input type="text" id="editNamaSopir" class="input-std">
-                </div>
-                <div>
-                    <label class="text-xs font-bold text-slate-500">No HP</label>
-                    <input type="text" id="editHpSopir" class="input-std">
-                </div>
+                <div><label class="text-xs font-bold text-slate-500">Nama</label><input type="text" id="editNamaSopir" class="w-full border p-2 rounded text-sm"></div>
+                <div><label class="text-xs font-bold text-slate-500">Email Login</label><input type="email" id="editEmailSopir" class="w-full border p-2 rounded text-sm bg-slate-50"></div>
+                <div><label class="text-xs font-bold text-slate-500">No HP</label><input type="text" id="editHpSopir" class="w-full border p-2 rounded text-sm"></div>
             </div>
             <div class="flex justify-end gap-2 mt-6">
-                <button onclick="document.getElementById('modalEditSopir').classList.add('hidden')" class="px-4 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded-lg transition">Batal</button>
-                <button onclick="saveEditSopir()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Update</button>
+                <button onclick="document.getElementById('modalEditSopir').classList.add('hidden')" class="px-4 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded text-sm">Batal</button>
+                <button onclick="saveEditSopir()" class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 text-sm">Simpan Perubahan</button>
             </div>
         </div>
     </div>
@@ -137,10 +155,8 @@
         function switchTab(t){
             document.querySelectorAll('.tab-content').forEach(e=>e.classList.add('hidden'));
             document.getElementById('tab-'+t).classList.remove('hidden');
-            document.querySelectorAll('.tab-nav button').forEach(b=>{
-                b.className="px-5 py-2.5 rounded-lg text-sm font-bold bg-white text-slate-500 hover:bg-slate-50 border border-slate-200 transition";
-            });
-            document.getElementById('btn-'+t).className="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-md transition";
+            document.querySelectorAll('.tab-nav button').forEach(b=>{ b.className="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap transition"; });
+            document.getElementById('btn-'+t).className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap transition";
         }
     </script>
 </body>

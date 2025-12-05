@@ -6,11 +6,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="bg-slate-100">
 
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="container mx-auto px-6 h-16 flex justify-between items-center">
+            
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow">
                     <i class="fas fa-plane-departure"></i>
@@ -20,9 +22,11 @@
                     <p class="text-xs text-slate-500">Mau kemana?</p>
                 </div>
             </div>
-            <button onclick="logout()" class="flex items-center gap-2 border border-slate-200 text-slate-500 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-50 hover:text-red-600 transition">
-                <i class="fas fa-power-off"></i> Logout
+            
+            <button onclick="logout()" class="bg-red-600 text-white hover:bg-red-700 px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition shadow-md hover:shadow-lg transform active:scale-95">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </button>
+
         </div>
     </nav>
 
@@ -36,42 +40,26 @@
 
     <div id="modalUpload" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-fade-in">
-            
             <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-                <h3 class="font-bold text-lg text-slate-800">Upload Bukti Bayar</h3>
+                <h3 class="font-bold text-lg text-slate-800">Konfirmasi Pembayaran</h3>
                 <button onclick="closeModal()" class="text-slate-400 hover:text-red-500 transition"><i class="fas fa-times text-lg"></i></button>
             </div>
-
             <div class="p-6">
                 <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-lg border border-slate-200 mb-6">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 border border-slate-100 shadow-sm">
-                        <i class="fas fa-wallet"></i>
-                    </div>
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 border border-slate-100 shadow-sm"><i class="fas fa-wallet"></i></div>
                     <div>
-                        <p class="text-xs font-bold text-slate-500 uppercase">Transfer BCA</p>
+                        <p class="text-xs font-bold text-slate-500 uppercase">Transfer BCA (travelkita)</p>
                         <p class="text-lg font-bold text-slate-800 font-mono tracking-wide">123-456-7890</p>
                     </div>
                 </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 text-sm font-bold text-slate-700">Foto Bukti Transfer</label>
-                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer bg-slate-50 hover:bg-blue-50 hover:border-blue-400 transition group">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                            <i class="fas fa-cloud-upload-alt text-2xl text-slate-400 mb-2 group-hover:text-blue-500 transition"></i>
-                            <p class="text-xs text-slate-500"><span class="font-bold">Klik untuk upload</span> atau drag foto kesini</p>
-                        </div>
-                        <input type="file" id="fileBukti" class="hidden" accept="image/*">
-                    </label>
-                    <div id="fileNamePreview" class="hidden mt-2 flex items-center gap-2 text-xs text-green-600 font-bold bg-green-50 p-2 rounded border border-green-100">
-                        <i class="fas fa-check"></i> <span id="fileNameText">foto.jpg</span>
-                    </div>
-                </div>
-
                 <input type="hidden" id="idPesananUpload">
-                
-                <button onclick="submitBukti()" class="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-black transition shadow-lg flex justify-center items-center gap-2">
-                    <i class="fas fa-paper-plane text-xs"></i> Kirim Sekarang
-                </button>
+                <div class="text-center">
+                    <p class="text-sm text-slate-600 mb-3 font-medium">Sudah transfer? Konfirmasi sekarang.</p>
+                    <button onclick="sendWA()" class="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition shadow-lg flex justify-center items-center gap-2">
+                        <i class="fab fa-whatsapp text-xl"></i> Konfirmasi ke Admin
+                    </button>
+                    <p class="text-xs text-slate-400 mt-4">*Status otomatis berubah setelah kirim WA.</p>
+                </div>
             </div>
         </div>
     </div>
