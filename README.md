@@ -1,92 +1,77 @@
-Sistem E-Tiket Travel
-Sistem Pemesanan Tiket Travel Antar Kota Berbasis Web
+ Sistem E-Tiket Travel System
 
-Aplikasi web ini dirancang untuk mempermudah proses pemesanan tiket travel, manajemen jadwal, dan manifest penumpang secara digital dan real-time. Dibangun menggunakan Vanilla JavaScript, Tailwind CSS, dan Firebase sebagai backend.
+**Sistem Pemesanan Tiket Travel Antar Kota Berbasis Web**
 
-🛠️ Teknologi yang Digunakan
-Frontend: HTML5, CSS3
+Aplikasi web modern untuk mempermudah operasional travel, mulai dari pemesanan tiket oleh penumpang, manajemen jadwal oleh admin, hingga manifest penumpang untuk sopir. 
 
-Styling: Tailwind CSS (via CDN)
+---
 
-Logic: Modern JavaScript
+## 🌟 Fitur Utama
 
-Backend & Database: Firebase (Authentication & Firestore)
+Sistem ini dibagi menjadi 3 hak akses (Role) dengan fitur yang saling terintegrasi secara realtime:
 
-Fitur Tambahan:
+### 1. 👤 Panel Penumpang
+* **Booking Realtime:** Melihat ketersediaan kursi terkini tanpa perlu refresh halaman.
+* **Pilih Kursi:** Visualisasi pemilihan kursi (Kursi terisi otomatis terkunci).
+* **E-Tiket PDF:** Download tiket resmi dalam format PDF yang berisi detail perjalanan.
+* **Konfirmasi WhatsApp:** Tombol otomatis untuk mengirim bukti pembayaran ke Admin.
+* **Status Transaksi:** Memantau status (Menunggu Verifikasi → Lunas).
 
-jsPDF (Generate Tiket PDF)
+### 2. 🛡️ Dashboard Admin
+* **Manajemen Jadwal:** Membuat jadwal perjalanan (Rute, Jam, Harga) dengan validasi sopir yang tersedia.
+* **Manajemen Sopir:** Menambah, mengedit, dan menghapus akun sopir.
+* **Verifikasi Pembayaran:** Menerima notifikasi pesanan masuk dan memverifikasi bukti transfer.
+* **Laporan Keuangan:** Rekapitulasi pendapatan otomatis dari tiket yang lunas.
+* **Cek Penumpang:** Melihat daftar penumpang pada setiap jadwal perjalanan.
 
-FontAwesome (Ikon UI)
+### 3. 🚕 Dashboard Sopir
+* **Jadwal Tugas:** Hanya melihat jadwal yang ditugaskan kepada dirinya sendiri.
+* **Manifest Digital:** Melihat daftar penumpang lengkap (Nama, No Kursi, No HP).
+* **Realtime Update:** Data penumpang langsung muncul saat tiket dipesan atau dilunasi.
 
-✨ Fitur Unggulan
-Aplikasi ini memiliki 3 hak akses pengguna (Role) dengan fitur spesifik masing-masing:
+---
 
-👤 1. Panel Penumpang
-Pemesanan Realtime: Melihat jadwal keberangkatan dan ketersediaan kursi secara langsung tanpa refresh halaman.
+## 🛠️ Teknologi yang Digunakan
 
-Visual Seat Selection: Memilih nomor kursi yang diinginkan melalui antarmuka visual (Kursi terisi otomatis tidak bisa dipilih).
+* **Frontend:** HTML5, Vanilla JavaScript (ES6 Modules).
+* **Styling:** Tailwind CSS (via CDN) & Custom CSS.
+* **Backend:** Firebase (Authentication & Firestore Database).
+* **Library:**
+    * `jsPDF` (Generate Tiket PDF).
+    * `FontAwesome` (Ikon Antarmuka).
 
-Status Transaksi: Memantau status tiket (Menunggu Pembayaran, Menunggu Verifikasi, Lunas).
+---
 
-Konfirmasi WhatsApp: Tombol otomatis untuk mengirim bukti transfer ke Admin via WhatsApp.
+## 📂 Struktur Folder
 
-Download E-Tiket: Mengunduh tiket resmi dalam format PDF yang berisi detail perjalanan, QR Code (simulasi), dan data penumpang.
+Kode disusun secara modular agar rapi dan mudah dikembangkan:
 
-Riwayat Pesanan: Melihat daftar riwayat perjalanan yang pernah dipesan.
+```text
+e-tiket-travel/
+│
+├── index.html           # Halaman Landing Page (Beranda)
+├── login.html           # Halaman Masuk
+├── register.html        # Halaman Pendaftaran
+├── admin.html           # Dashboard Admin
+├── passenger.html       # Dashboard Penumpang
+├── driver.html          # Dashboard Sopir
+│
+├── css/
+│   └── style.css        # Styling tambahan & animasi
+│
+└── js/
+    ├── firebase-config.js  # Konfigurasi koneksi ke Firebase
+    ├── admin.js            # Logika Admin (CRUD, Verifikasi)
+    ├── passenger.js        # Logika Penumpang (Booking, PDF)
+    ├── driver.js           # Logika Sopir (Manifest)
+    └── utils.js            # Fungsi bantuan (Notifikasi Toast)
+🚀 Cara Menjalankan ProjectIkuti langkah mudah ini untuk mencoba aplikasi di komputer lokal:
 
-🛡️ 2. Dashboard Admin
-Manajemen Jadwal: Membuat, mengedit, dan menghapus jadwal keberangkatan (Rute, Jam, Harga).
+1. Clone RepositoriDownload source code ke komputer Anda:Bashgit clone [https://github.com/USERNAME-ANDA/NAMA-REPO.git](https://github.com/USERNAME-ANDA/NAMA-REPO.git)
 
-Manajemen Sopir:
+2. Siapkan FirebaseBuka Firebase Console.Buat project baru.Aktifkan Authentication (Email/Password).Aktifkan Firestore Database (Start in Test Mode).
 
-Menambah akun sopir baru.
-
-Validasi password & email saat pendaftaran.
-
-Edit dan Hapus data sopir.
-
-Smart Dropdown: Sopir yang sedang bertugas tidak muncul saat pembuatan jadwal baru.
-
-Verifikasi Pembayaran:
-
-Notifikasi realtime saat ada pesanan masuk.
-
-Melihat bukti transfer.
-
-Tombol "Terima Pembayaran" untuk mengubah status menjadi Lunas.
-
-Laporan Keuangan: Rekapitulasi pendapatan dari tiket yang berstatus "Lunas".
-
-Lihat Penumpang: Klik pada kartu jadwal untuk melihat daftar nama penumpang yang terdaftar di jadwal tersebut.
-
-🚕 3. Dashboard Sopir
-Jadwal Penugasan: Melihat jadwal perjalanan khusus yang ditugaskan kepada sopir tersebut (Realtime).
-
-Manifest Penumpang Digital: Melihat daftar penumpang lengkap dengan Nama, Nomor Kursi, dan Nomor HP.
-
-Status Lunas/Belum: Mengetahui penumpang mana yang sudah lunas atau belum.
-
-🚀 Cara Menjalankan Project
-Ikuti langkah-langkah ini untuk menjalankan project di komputer lokal Anda:
-
-Clone Repositori
-
-Bash
-
-git clone https://github.com/username-anda/nama-repo-anda.git
-cd nama-repo-anda
-Konfigurasi Firebase
-
-Buat project baru di Firebase Console.
-
-Aktifkan Authentication (Email/Password).
-
-Aktifkan Firestore Database.
-
-Buka file js/firebase-config.js dan ganti bagian firebaseConfig dengan kredensial project Anda:
-
-JavaScript
-
+3. Konfigurasi KodinganBuka file js/firebase-config.js dan ganti bagian firebaseConfig dengan milik Anda:JavaScript
 const firebaseConfig = {
     apiKey: "API_KEY_ANDA",
     authDomain: "PROJECT_ID.firebaseapp.com",
@@ -95,31 +80,5 @@ const firebaseConfig = {
     messagingSenderId: "SENDER_ID",
     appId: "APP_ID"
 };
-Jalankan Aplikasi
 
-Karena menggunakan ES6 Modules, Anda harus menjalankannya menggunakan local server (tidak bisa klik ganda file html).
-
-Jika menggunakan VS Code, install ekstensi Live Server.
-
-Klik kanan pada index.html -> Open with Live Server.
-
-📂 Struktur Folder
-Plaintext
-
-/
-├── index.html           # Landing Page (Beranda)
-├── login.html           # Halaman Login
-├── register.html        # Halaman Registrasi Penumpang
-├── admin.html           # Dashboard Admin
-├── passenger.html       # Dashboard Penumpang
-├── driver.html          # Dashboard Sopir
-│
-├── css/
-│   └── style.css        # Custom CSS & Animasi
-│
-└── js/
-    ├── firebase-config.js  # Konfigurasi & Export Fungsi Firebase
-    ├── admin.js            # Logika Dashboard Admin
-    ├── passenger.js        # Logika Dashboard Penumpang
-    ├── driver.js           # Logika Dashboard Sopir
-    └── utils.js            # Fungsi utilitas (Toast Notifikasi)
+4. Jalankan (Wajib Live Server)Karena project ini menggunakan JavaScript Modules (type="module"), Anda tidak bisa menjalankannya hanya dengan klik ganda file HTML.Cara Termudah: Gunakan ekstensi Live Server di VS Code.Klik kanan index.html -> Pilih Open with Live Server.
