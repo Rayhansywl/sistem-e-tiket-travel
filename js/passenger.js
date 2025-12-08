@@ -260,7 +260,7 @@ window.closeModal = () => {
 };
 window.sendWA = async () => {
   const id = document.getElementById("idPesananUpload").value;
-  const nomorWA = "6282294425415";
+  const nomorWA = "6283172262686";
   const btn = document.querySelector('button[onclick="sendWA()"]');
   btn.innerHTML = "Memproses...";
   btn.disabled = true;
