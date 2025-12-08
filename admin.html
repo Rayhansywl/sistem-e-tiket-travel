@@ -1,181 +1,407 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+  <head>
     <title>Admin Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-slate-50">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-slate-50">
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="container mx-auto px-6 h-16 flex justify-between items-center">
-            <div class="font-bold text-slate-800 text-xl tracking-tight">Dashboard Admin</div>
-            <div class="flex items-center gap-6">
-                <div class="text-right hidden md:block leading-tight">
-                    <span id="adminName" class="block text-sm font-bold text-slate-700">Administrator</span>
-                    <span class="block text-[10px] text-slate-500 font-medium">Admin</span>
-                </div>
-                <button onclick="logout()" class="bg-red-600 text-white hover:bg-red-700 px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition shadow-md active:scale-95">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
+      <div
+        class="container mx-auto px-6 h-16 flex justify-between items-center"
+      >
+        <div class="font-bold text-slate-800 text-xl tracking-tight">
+          Dashboard Admin
         </div>
+        <div class="flex items-center gap-6">
+          <div class="text-right hidden md:block leading-tight">
+            <span id="adminName" class="block text-sm font-bold text-slate-700"
+              >Administrator</span
+            >
+            <span class="block text-[10px] text-slate-500 font-medium"
+              >Admin</span
+            >
+          </div>
+          <button
+            onclick="logout()"
+            class="bg-red-600 text-white hover:bg-red-700 px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition shadow-md active:scale-95"
+          >
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
     </nav>
 
     <div class="container mx-auto p-6 max-w-7xl animate-fade-in">
-        
-        <div class="flex gap-2 mb-6 tab-nav overflow-x-auto pb-2 no-scrollbar">
-            <button onclick="switchTab('jadwal')" id="btn-jadwal" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap">Jadwal</button>
-            <button onclick="switchTab('users')" id="btn-users" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Data Sopir</button>
-            <button onclick="switchTab('penumpang')" id="btn-penumpang" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Data Penumpang</button>
-            <button onclick="switchTab('transaksi')" id="btn-transaksi" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Verifikasi Pembayaran</button>
-            <button onclick="switchTab('laporan')" id="btn-laporan" class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap">Laporan Keuangan</button>
-        </div>
+      <div class="flex gap-2 mb-6 tab-nav overflow-x-auto pb-2 no-scrollbar">
+        <button
+          onclick="switchTab('jadwal')"
+          id="btn-jadwal"
+          class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap"
+        >
+          Jadwal
+        </button>
+        <button
+          onclick="switchTab('users')"
+          id="btn-users"
+          class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap"
+        >
+          Data Sopir
+        </button>
+        <button
+          onclick="switchTab('penumpang')"
+          id="btn-penumpang"
+          class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap"
+        >
+          Data Penumpang
+        </button>
+        <button
+          onclick="switchTab('transaksi')"
+          id="btn-transaksi"
+          class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap"
+        >
+          Verifikasi Pembayaran
+        </button>
+        <button
+          onclick="switchTab('laporan')"
+          id="btn-laporan"
+          class="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap"
+        >
+          Laporan Keuangan
+        </button>
+      </div>
 
-        <div id="tab-jadwal" class="tab-content">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="card p-6 h-fit bg-white rounded-xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">Buat Jadwal Baru</h3>
-                    <form id="formJadwal" class="space-y-4">
-                        <div>
-                            <label class="text-xs font-bold text-slate-500">Rute keberangkatan</label>
-                            <input type="text" id="tujuan" placeholder="Masukan Rute..." class="w-full border p-2 rounded-lg text-sm outline-none focus:border-blue-500" required>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="text-xs font-bold text-slate-500">Tanggal</label>
-                                <input type="date" id="tanggal" class="w-full border p-2 rounded-lg text-sm" required>
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold text-slate-500">Jam</label>
-                                <input type="time" id="jam" class="w-full border p-2 rounded-lg text-sm" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-500">Harga Tiket</label>
-                            <input type="number" id="harga" placeholder="Masukan Harga..." class="w-full border p-2 rounded-lg text-sm" required>
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-500">Pilih Sopir</label>
-                            <select id="pilihSupir" class="w-full border p-2 rounded-lg text-sm bg-white"><option>Loading...</option></select>
-                        </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">Simpan Jadwal</button>
-                    </form>
-                </div>
-                <div class="lg:col-span-2 space-y-4" id="listJadwal"></div>
-            </div>
-        </div>
-
-        <div id="tab-users" class="tab-content hidden">
-            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-bold text-slate-800 text-lg">Manajemen Sopir</h3>
-                    <button onclick="document.getElementById('formSopirArea').classList.toggle('hidden')" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-black transition flex items-center gap-2"><i class="fas fa-plus"></i> Tambah Sopir</button>
-                </div>
-                <div id="formSopirArea" class="hidden mb-6 bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <form id="formTambahSopir" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                         <input type="text" id="regNamaSopir" placeholder="masukan Nama..." class="border p-2 rounded-lg text-sm" required>
-                         <input type="text" id="regHpSopir" placeholder="Masukan Nomor..." class="border p-2 rounded-lg text-sm" required>
-                         <input type="email" id="regEmailSopir" placeholder="masukanEmail..." class="border p-2 rounded-lg text-sm" required>
-                         <input type="password" id="regPassSopir" placeholder="Masukan Password..." class="border p-2 rounded-lg text-sm" required>
-                         <button type="submit" class="bg-blue-600 text-white py-2 rounded-lg font-bold text-sm md:col-span-2 hover:bg-blue-700">Simpan Data Sopir</button>
-                    </form>
-                </div>
-                <div class="overflow-x-auto rounded-lg border border-slate-100"><table class="w-full text-sm text-left"><tbody id="listSopirTable"></tbody></table></div>
-            </div>
-        </div>
-
-        <div id="tab-penumpang" class="tab-content hidden">
-            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
-                <h3 class="font-bold text-slate-800 mb-4 text-lg">Data Penumpang</h3>
-                <div class="overflow-x-auto rounded-lg border border-slate-100">
-                    <table class="w-full text-sm text-left">
-                        <thead class="bg-slate-50 text-slate-500 font-bold border-b">
-                            <tr><th class="p-3">Nama</th><th class="p-3">Kontak</th><th class="p-3">Email</th><th class="p-3">Bergabung</th></tr>
-                        </thead>
-                        <tbody id="listPenumpangTable" class="divide-y divide-slate-100"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div id="tab-transaksi" class="tab-content hidden">
-            <div class="flex items-center mb-4">
-                <h3 class="font-bold text-slate-800 text-lg">Verifikasi Pembayaran Masuk</h3>
-            </div>
-            <div id="gridTransaksi" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-        </div>
-
-        <div id="tab-laporan" class="tab-content hidden">
-            <div class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-bold text-slate-800 text-lg">Laporan Keuangan (Lunas)</h3>
-                    <div class="bg-green-50 text-green-700 px-5 py-3 rounded-xl border border-green-100 text-right">
-                        <p class="text-xs font-bold uppercase tracking-wider opacity-70">Total Pendapatan</p>
-                        <p class="text-2xl font-bold" id="totalPendapatan">Rp0</p>
-                    </div>
-                </div>
-                <div class="overflow-x-auto rounded-lg border border-slate-100">
-                    <table class="w-full text-sm text-left">
-                        <thead class="bg-slate-50 text-slate-700 font-bold border-b">
-                            <tr>
-                                <th class="p-3">Tanggal</th><th class="p-3">Penumpang</th><th class="p-3">Rute</th><th class="p-3">Kursi</th><th class="p-3 text-right">Nominal</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabelLaporan" class="divide-y divide-slate-100"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalEditSopir" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-xl w-full max-w-sm shadow-2xl">
-            <h3 class="font-bold text-lg mb-4 text-slate-800 border-b pb-2">Edit Data Sopir</h3>
-            <input type="hidden" id="editIdSopir">
-            <div class="space-y-3">
-                <div><label class="text-xs font-bold text-slate-500">Nama</label><input type="text" id="editNamaSopir" class="w-full border p-2 rounded text-sm"></div>
-                <div><label class="text-xs font-bold text-slate-500">Email Login</label><input type="email" id="editEmailSopir" class="w-full border p-2 rounded text-sm bg-slate-50"></div>
-                <div><label class="text-xs font-bold text-slate-500">No HP</label><input type="text" id="editHpSopir" class="w-full border p-2 rounded text-sm"></div>
-            </div>
-            <div class="flex justify-end gap-2 mt-6">
-                <button onclick="document.getElementById('modalEditSopir').classList.add('hidden')" class="px-4 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded text-sm">Batal</button>
-                <button onclick="saveEditSopir()" class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 text-sm">Simpan Perubahan</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalLihatPenumpang" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-xl w-full max-w-lg shadow-2xl h-[80vh] flex flex-col">
-            <div class="p-5 border-b flex justify-between items-center">
+      <div id="tab-jadwal" class="tab-content">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div
+            class="card p-6 h-fit bg-white rounded-xl border border-slate-200 shadow-sm"
+          >
+            <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">
+              Buat Jadwal Baru
+            </h3>
+            <form id="formJadwal" class="space-y-4">
+              <div>
+                <label class="text-xs font-bold text-slate-500"
+                  >Rute keberangkatan</label
+                >
+                <input
+                  type="text"
+                  id="tujuan"
+                  placeholder="Masukan Rute..."
+                  class="w-full border p-2 rounded-lg text-sm outline-none focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <h3 class="font-bold text-lg text-slate-800">Daftar Penumpang</h3>
-                    <p id="judulJadwalDetail" class="text-xs text-slate-500"></p>
+                  <label class="text-xs font-bold text-slate-500"
+                    >Tanggal</label
+                  >
+                  <input
+                    type="date"
+                    id="tanggal"
+                    class="w-full border p-2 rounded-lg text-sm"
+                    required
+                  />
                 </div>
-                <button onclick="document.getElementById('modalLihatPenumpang').classList.add('hidden')" class="text-slate-400 hover:text-red-500"><i class="fas fa-times text-xl"></i></button>
-            </div>
-            <div class="flex-1 overflow-y-auto p-0">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-50 text-slate-600 font-bold sticky top-0">
-                        <tr><th class="p-4 border-b">No</th><th class="p-4 border-b">Nama</th><th class="p-4 border-b">Status</th></tr>
-                    </thead>
-                    <tbody id="listPenumpangJadwal" class="divide-y divide-slate-100"></tbody>
-                </table>
-                <div id="emptyPenumpangJadwal" class="hidden text-center py-10 text-slate-400">Belum ada penumpang.</div>
-            </div>
+                <div>
+                  <label class="text-xs font-bold text-slate-500">Jam</label>
+                  <input
+                    type="time"
+                    id="jam"
+                    class="w-full border p-2 rounded-lg text-sm"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-500"
+                  >Harga Tiket</label
+                >
+                <input
+                  type="number"
+                  id="harga"
+                  placeholder="Masukan Harga..."
+                  class="w-full border p-2 rounded-lg text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-500"
+                  >Pilih Sopir</label
+                >
+                <select
+                  id="pilihSupir"
+                  class="w-full border p-2 rounded-lg text-sm bg-white"
+                >
+                  <option>Loading...</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+              >
+                Simpan Jadwal
+              </button>
+            </form>
+          </div>
+          <div class="lg:col-span-2 space-y-4" id="listJadwal"></div>
         </div>
+      </div>
+
+      <div id="tab-users" class="tab-content hidden">
+        <div
+          class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-bold text-slate-800 text-lg">Manajemen Sopir</h3>
+            <button
+              onclick="document.getElementById('formSopirArea').classList.toggle('hidden')"
+              class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-black transition flex items-center gap-2"
+            >
+              <i class="fas fa-plus"></i> Tambah Sopir
+            </button>
+          </div>
+          <div
+            id="formSopirArea"
+            class="hidden mb-6 bg-slate-50 p-5 rounded-xl border border-slate-200"
+          >
+            <form
+              id="formTambahSopir"
+              class="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              <input
+                type="text"
+                id="regNamaSopir"
+                placeholder="masukan Nama..."
+                class="border p-2 rounded-lg text-sm"
+                required
+              />
+              <input
+                type="text"
+                id="regHpSopir"
+                placeholder="Masukan Nomor..."
+                class="border p-2 rounded-lg text-sm"
+                required
+              />
+              <input
+                type="email"
+                id="regEmailSopir"
+                placeholder="masukanEmail..."
+                class="border p-2 rounded-lg text-sm"
+                required
+              />
+              <input
+                type="password"
+                id="regPassSopir"
+                placeholder="Masukan Password..."
+                class="border p-2 rounded-lg text-sm"
+                required
+              />
+              <button
+                type="submit"
+                class="bg-blue-600 text-white py-2 rounded-lg font-bold text-sm md:col-span-2 hover:bg-blue-700"
+              >
+                Simpan Data Sopir
+              </button>
+            </form>
+          </div>
+          <div class="overflow-x-auto rounded-lg border border-slate-100">
+            <table class="w-full text-sm text-left">
+              <tbody id="listSopirTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-penumpang" class="tab-content hidden">
+        <div
+          class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm"
+        >
+          <h3 class="font-bold text-slate-800 mb-4 text-lg">Data Penumpang</h3>
+          <div class="overflow-x-auto rounded-lg border border-slate-100">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-slate-50 text-slate-500 font-bold border-b">
+                <tr>
+                  <th class="p-3">Nama</th>
+                  <th class="p-3">Kontak</th>
+                  <th class="p-3">Email</th>
+                  <th class="p-3">Bergabung</th>
+                </tr>
+              </thead>
+              <tbody
+                id="listPenumpangTable"
+                class="divide-y divide-slate-100"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-transaksi" class="tab-content hidden">
+        <div class="flex items-center mb-4">
+          <h3 class="font-bold text-slate-800 text-lg">
+            Verifikasi Pembayaran Masuk
+          </h3>
+        </div>
+        <div
+          id="gridTransaksi"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+      </div>
+
+      <div id="tab-laporan" class="tab-content hidden">
+        <div
+          class="card p-6 bg-white rounded-xl border border-slate-200 shadow-sm"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-bold text-slate-800 text-lg">
+              Laporan Keuangan (Lunas)
+            </h3>
+            <div
+              class="bg-green-50 text-green-700 px-5 py-3 rounded-xl border border-green-100 text-right"
+            >
+              <p class="text-xs font-bold uppercase tracking-wider opacity-70">
+                Total Pendapatan
+              </p>
+              <p class="text-2xl font-bold" id="totalPendapatan">Rp0</p>
+            </div>
+          </div>
+          <div class="overflow-x-auto rounded-lg border border-slate-100">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-slate-50 text-slate-700 font-bold border-b">
+                <tr>
+                  <th class="p-3">Tanggal</th>
+                  <th class="p-3">Penumpang</th>
+                  <th class="p-3">Rute</th>
+                  <th class="p-3">Kursi</th>
+                  <th class="p-3 text-right">Nominal</th>
+                </tr>
+              </thead>
+              <tbody
+                id="tabelLaporan"
+                class="divide-y divide-slate-100"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="modalEditSopir"
+      class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+    >
+      <div class="bg-white p-6 rounded-xl w-full max-w-sm shadow-2xl">
+        <h3 class="font-bold text-lg mb-4 text-slate-800 border-b pb-2">
+          Edit Data Sopir
+        </h3>
+        <input type="hidden" id="editIdSopir" />
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs font-bold text-slate-500">Nama</label
+            ><input
+              type="text"
+              id="editNamaSopir"
+              class="w-full border p-2 rounded text-sm"
+            />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-500">Email Login</label
+            ><input
+              type="email"
+              id="editEmailSopir"
+              class="w-full border p-2 rounded text-sm bg-slate-50"
+            />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-500">No HP</label
+            ><input
+              type="text"
+              id="editHpSopir"
+              class="w-full border p-2 rounded text-sm"
+            />
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 mt-6">
+          <button
+            onclick="document.getElementById('modalEditSopir').classList.add('hidden')"
+            class="px-4 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded text-sm"
+          >
+            Batal
+          </button>
+          <button
+            onclick="saveEditSopir()"
+            class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 text-sm"
+          >
+            Simpan Perubahan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="modalLihatPenumpang"
+      class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white rounded-xl w-full max-w-lg shadow-2xl h-[80vh] flex flex-col"
+      >
+        <div class="p-5 border-b flex justify-between items-center">
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">Daftar Penumpang</h3>
+            <p id="judulJadwalDetail" class="text-xs text-slate-500"></p>
+          </div>
+          <button
+            onclick="document.getElementById('modalLihatPenumpang').classList.add('hidden')"
+            class="text-slate-400 hover:text-red-500"
+          >
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-0">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-slate-50 text-slate-600 font-bold sticky top-0">
+              <tr>
+                <th class="p-4 border-b">No</th>
+                <th class="p-4 border-b">Nama</th>
+                <th class="p-4 border-b">Status</th>
+              </tr>
+            </thead>
+            <tbody
+              id="listPenumpangJadwal"
+              class="divide-y divide-slate-100"
+            ></tbody>
+          </table>
+          <div
+            id="emptyPenumpangJadwal"
+            class="hidden text-center py-10 text-slate-400"
+          >
+            Belum ada penumpang.
+          </div>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="js/admin.js"></script>
     <script>
-        function switchTab(t){
-            document.querySelectorAll('.tab-content').forEach(e=>e.classList.add('hidden'));
-            document.getElementById('tab-'+t).classList.remove('hidden');
-            document.querySelectorAll('.tab-nav button').forEach(b=>{ b.className="bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap transition"; });
-            document.getElementById('btn-'+t).className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap transition";
-        }
+      function switchTab(t) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((e) => e.classList.add("hidden"));
+        document.getElementById("tab-" + t).classList.remove("hidden");
+        document.querySelectorAll(".tab-nav button").forEach((b) => {
+          b.className =
+            "bg-white text-slate-500 hover:bg-slate-100 px-5 py-2 rounded-full text-sm font-bold border border-slate-200 whitespace-nowrap transition";
+        });
+        document.getElementById("btn-" + t).className =
+          "bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm whitespace-nowrap transition";
+      }
     </script>
-</body>
+  </body>
 </html>

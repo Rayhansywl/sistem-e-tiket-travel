@@ -1,57 +1,115 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+  <head>
     <title>Daftar - E-Tiket Travel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
     <div class="card w-full max-w-md p-8 animate-fade-in relative">
-        <a href="index.html" class="text-sm text-slate-400 hover:text-blue-600 mb-6 inline-flex items-center gap-2 transition">
-            <i class="fas fa-arrow-left"></i> Kembali
-        </a>
+      <a
+        href="index.html"
+        class="text-sm text-slate-400 hover:text-blue-600 mb-6 inline-flex items-center gap-2 transition"
+      >
+        <i class="fas fa-arrow-left"></i> Kembali
+      </a>
 
-        <div class="text-center mb-6">
-            <h2 class="text-2xl font-bold text-slate-800">Registrasi Penumpang</h2>
-            <p class="text-slate-500 text-sm mt-1">Buat akun untuk mulai memesan</p>
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-800">Registrasi Penumpang</h2>
+        <p class="text-slate-500 text-sm mt-1">Buat akun untuk mulai memesan</p>
+      </div>
+
+      <form id="registerForm" autocomplete="off" class="space-y-4">
+        <input type="text" style="display: none" /><input
+          type="password"
+          style="display: none"
+        />
+
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-1"
+            >Nama Lengkap</label
+          >
+          <input
+            type="text"
+            id="nama"
+            class="input-std"
+            placeholder="masukan Nama..."
+            autocomplete="off"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
+            required
+          />
         </div>
 
-        <form id="registerForm" autocomplete="off" class="space-y-4">
-            <input type="text" style="display:none"><input type="password" style="display:none">
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-1"
+            >No WhatsApp</label
+          >
+          <input
+            type="tel"
+            id="hp"
+            class="input-std"
+            placeholder="Masukan Nomor..."
+            autocomplete="off"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
+            required
+          />
+        </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Nama Lengkap</label>
-                <input type="text" id="nama" class="input-std" placeholder="masukan Nama..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required>
-            </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-1"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            class="input-std"
+            placeholder="Masukan Email..."
+            autocomplete="off"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
+            required
+          />
+        </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">No WhatsApp</label>
-                <input type="tel" id="hp" class="input-std" placeholder="Masukan Nomor..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required>
-            </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase mb-1"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            class="input-std"
+            placeholder="Masukan Password..."
+            autocomplete="new-password"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
+            required
+          />
+        </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Email</label>
-                <input type="email" id="email" class="input-std" placeholder="Masukan Email..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required>
-            </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md mt-2"
+        >
+          Daftar Sekarang
+        </button>
+      </form>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Password</label>
-                <input type="password" id="password" class="input-std" placeholder="Masukan Password..." autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly');" required>
-            </div>
-
-            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md mt-2">
-                Daftar Sekarang
-            </button>
-        </form>
-
-        <p class="mt-6 text-center text-sm text-slate-600">
-            Sudah punya akun? <a href="login.html" class="text-blue-600 font-bold hover:underline">Masuk disini</a>
-        </p>
+      <p class="mt-6 text-center text-sm text-slate-600">
+        Sudah punya akun?
+        <a href="login.html" class="text-blue-600 font-bold hover:underline"
+          >Masuk disini</a
+        >
+      </p>
     </div>
 
     <script type="module" src="js/auth.js"></script>
-</body>
+  </body>
 </html>
